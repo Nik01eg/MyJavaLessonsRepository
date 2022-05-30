@@ -1,32 +1,34 @@
 package Homework.Second;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 interface BrandsName{
     public static final String FIRST_BRAND = "Chevrolet";
     public static final String SECOND_BRAND = "Lada";
-    public static final String THIRD_BRAND= "VolksWagen";
-    public static final String FOURTH_BRAND= "Ford";
-    public static final String FIFTH_BRAND= "Volvo";
-    public static final String SIXTH_BRAND= "Mazda";
-    public static final String SEVENTH_BRAND= "Renault";
-    public static final String EIGHTH_BRAND= "Kia";
-    public static final String NINTH_BRAND= "Honda";
+    public static final String THIRD_BRAND = "VolksWagen";
+    public static final String FOURTH_BRAND = "Ford";
+    public static final String FIFTH_BRAND = "Volvo";
+    public static final String SIXTH_BRAND = "Mazda";
+    public static final String SEVENTH_BRAND = "Renault";
+    public static final String EIGHTH_BRAND = "Kia";
+    public static final String NINTH_BRAND = "Honda";
     public static final String TENTH_BRAND = "Seat";
-    public static final String ELEVENTH_BRAND= "BMW";
-    public static final String TWELFTH_BRAND= "Mersedes";
-    public static final String THIRTEENTH_BRAND= "Audi";
-    public static final String FOURTEENTH_BRAND= "Mitsubishi";
-    public static final String FIFTEENTH_BRAND= "RollsRoyce";
+    public static final String ELEVENTH_BRAND = "BMW";
+    public static final String TWELFTH_BRAND = "Mersedes";
+    public static final String THIRTEENTH_BRAND = "Audi";
+    public static final String FOURTEENTH_BRAND = "Mitsubishi";
+    public static final String FIFTEENTH_BRAND = "RollsRoyce";
 }
 
 class ArrayOfCars implements BrandsName{
     public static Car [] CreateAndGetCarsArray(int carNumbers){
         Car [] array = new Car[carNumbers];
-        String carsBrand;
 
         for(int c = 0; c < array.length; c++){
+            String carsBrand;
             int ran = (int)(Math.random() * 100.0D);
+
             if (ran < 16) carsBrand = BrandsName.FIRST_BRAND;
             else if (ran < 22) carsBrand = BrandsName.SECOND_BRAND;
             else if (ran < 28) carsBrand = BrandsName.THIRD_BRAND;
@@ -51,27 +53,114 @@ class ArrayOfCars implements BrandsName{
 }
 
 public class Car{
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return doorsNumber == car.doorsNumber && seatsNumbers == car.seatsNumbers && Double.compare(car.engineVolume, engineVolume) == 0 && Double.compare(car.fuelConsumptionPer100Kilometers, fuelConsumptionPer100Kilometers) == 0 && Double.compare(car.maxSpeed, maxSpeed) == 0 && Objects.equals(carsBrand, car.carsBrand) && Objects.equals(carsModel, car.carsModel);
+    }
 
-    String carsBrand;
-    String carsModel;
-    int doorsNumber;
-    int seatsNumbers;
-    double engineVolume;
-    double fuelConsumptionPer100kilometers;
-    double maxSpeed;
+    @Override
+    public int hashCode() {
+        return Objects.hash(carsBrand, carsModel, doorsNumber, seatsNumbers, engineVolume, fuelConsumptionPer100Kilometers, maxSpeed);
+    }
 
-    Car(String carsBrand, String carsModel, int doorsNumber, int seatsNumbers, double engineVolume, double fuelConsumptionPer100kilometers, double maxSpeed) {
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carsBrand='" + carsBrand + '\'' +
+                ", carsModel='" + carsModel + '\'' +
+                ", doorsNumber=" + doorsNumber +
+                ", seatsNumbers=" + seatsNumbers +
+                ", engineVolume=" + engineVolume +
+                ", fuelConsumptionPer100kilometers=" + fuelConsumptionPer100Kilometers +
+                ", maxSpeed=" + maxSpeed +
+                '}';
+    }
+
+    private String carsBrand;
+    private String carsModel;
+    private int doorsNumber;
+    private int seatsNumbers;
+    private double engineVolume;
+    private double fuelConsumptionPer100Kilometers;
+    private double maxSpeed;
+
+    Car(String carsBrand, String carsModel, int doorsNumber, int seatsNumbers, double engineVolume, double fuelConsumptionPer100Kilometers, double maxSpeed){
         this.carsBrand = carsBrand;
         this.carsModel = carsModel;
         this.doorsNumber = doorsNumber;
         this.seatsNumbers = seatsNumbers;
         this.engineVolume = engineVolume;
-        this.fuelConsumptionPer100kilometers = fuelConsumptionPer100kilometers;
+        this.fuelConsumptionPer100Kilometers = fuelConsumptionPer100Kilometers;
         this.maxSpeed = maxSpeed;
 
     }
+
+    Car(){
+        carsBrand = null;
+        carsModel = null;
+        doorsNumber = 0;
+        seatsNumbers = 0;
+        engineVolume = 0.0;
+        fuelConsumptionPer100Kilometers = 0.0;
+        maxSpeed = 0;
+    }
+
+
+    public String getCarsBrand () {
+        return carsBrand;
+    }
+    public void setCarsBrand (String carsBrand){
+        this.carsBrand = carsBrand;
+    }
+
+    public String getCarsModel(){
+        return carsModel;
+    }
+    public void setCarsModel(String carsModel){
+        this.carsModel = carsModel;
+    }
+
+    public int getDoorsNumber(){
+        return doorsNumber;
+    }
+    public void setDoorsNumber(int doorsNumber){
+        this.doorsNumber = doorsNumber;
+    }
+
+    public int getSeatsNumbers(){
+        return seatsNumbers;
+    }
+    public void setSeatsNumbers(int seatsNumbers){
+        this.seatsNumbers = seatsNumbers;
+    }
+
+    public double getEngineVolume(){
+        return engineVolume;
+    }
+    public void setEngineVolume(double engineVolume){
+        this.engineVolume = engineVolume;
+    }
+
+    public double getFuelConsumptionPer100Kilometers(){
+        return fuelConsumptionPer100Kilometers;
+    }
+    public void setFuelConsumptionPer100Kilometers(double fuelConsumptionPer100Kilometers){
+        this.fuelConsumptionPer100Kilometers = fuelConsumptionPer100Kilometers;
+    }
+
+    public double getMaxSpeed(){
+        return maxSpeed;
+    }
+    public void setMaxSpeed(double maxSpeed){
+        this.maxSpeed = maxSpeed;
+    }
+
     public static void main(String [] args){
-        System.out.print(Arrays.toString(ArrayOfCars.CreateAndGetCarsArray(10)));
+        Car [] arr = ArrayOfCars.CreateAndGetCarsArray(10);
+        for(Car c: arr) System.out.println(c.toString());
     }
 
 }
