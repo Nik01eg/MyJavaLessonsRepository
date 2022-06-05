@@ -1,6 +1,5 @@
 package Homework.Second;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 interface BrandsName{
@@ -19,6 +18,11 @@ interface BrandsName{
     public static final String THIRTEENTH_BRAND = "Audi";
     public static final String FOURTEENTH_BRAND = "Mitsubishi";
     public static final String FIFTEENTH_BRAND = "RollsRoyce";
+}
+
+interface AutoRun{
+    public abstract boolean CarRun();
+    public abstract int CarSpeed();
 }
 
 class ArrayOfCars implements BrandsName{
@@ -52,7 +56,8 @@ class ArrayOfCars implements BrandsName{
     }
 }
 
-public class Car{
+
+public class Car implements AutoRun{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +83,27 @@ public class Car{
                 ", maxSpeed=" + maxSpeed +
                 '}';
     }
+
+    @Override
+    public boolean CarRun() {
+        boolean CarRunningNow = false;
+
+        //Some code witch decide is car running or not
+
+        if(CarRunningNow) return true;
+        else return false;
+    }
+
+    @Override
+    public int CarSpeed() {
+        int carSpeed = 0 ;
+
+        //Some code witch calculating car speed
+
+        return carSpeed;
+    }
+
+
 
     private String carsBrand;
     private String carsModel;
@@ -158,10 +184,14 @@ public class Car{
         this.maxSpeed = maxSpeed;
     }
 
-    public static void main(String [] args){
-        Car [] arr = ArrayOfCars.CreateAndGetCarsArray(10);
-        for(Car c: arr) System.out.println(c.toString());
-    }
+    public static void main(String [] args) {
+        Car[] arr = ArrayOfCars.CreateAndGetCarsArray(10);
+        for (Car c : arr) System.out.println(c.toString());
 
+        System.out.println(" ");
+
+        AutoRun newCar = new Car();
+        System.out.println(newCar.CarRun() + " " + newCar.CarSpeed());
+    }
 }
 
